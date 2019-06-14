@@ -10,5 +10,15 @@
         border: 1px solid #ededed;
         margin: 0 auto;
         height: 60vh;
+        h3{
+            color: #5b5b5f;
+            font-weight: bold;
+        }
+        .content-button{
+            text-align: center;
+            .btn-yellow{
+                width: 50%;
+            }
+        }
     }
 }

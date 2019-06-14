@@ -1,7 +1,7 @@
 <ion-content>
   <div class="container-login">
     <div class="login-card">
-      <form [formGroup]="loginForm" >
+      <form [formGroup]="loginForm" (click)="onSubmit()">
         <ion-grid>
           <ion-row color="primary" justify-content-center>
             <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
@@ -10,29 +10,32 @@
               </div>
               <div padding>
                 <ion-item>
-                  <ion-input type="email" placeholder="your@email.com" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"></ion-input>
-                  <div *ngIf="submitted && f.email.errors">
-                    <div *ngIf="f.email.errors.required" class="error">Email es requerido</div>
-                  </div>
+                  <ion-input type="email" placeholder="Email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"></ion-input>
                 </ion-item>
+                <div class="error" *ngIf="submitted && f.email.errors">
+                  <div *ngIf="f.email.errors.required" >Email es requerido</div>
+                </div>
                 <ion-item>
                   <ion-input type="password" placeholder="Password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"></ion-input>
-                  <div *ngIf="submitted && f.password.errors">
-                    <div *ngIf="f.password.errors.required" class="error">Password es requerido</div>
-                  </div>
                 </ion-item>
+                <div class="error" *ngIf="submitted && f.password.errors">
+                  <div *ngIf="f.password.errors.required" >Password es requerido</div>
+                </div>
                 <ion-item>
                     <ion-input type="text" placeholder="App" formControlName="app" [ngClass]="{ 'is-invalid': submitted && f.app.errors }"></ion-input>
-                    <div *ngIf="submitted && f.app.errors">
-                      <div *ngIf="f.app.errors.required" class="error">App es requerido</div>
-                    </div>
-                  </ion-item>
+                </ion-item>
+                <div class="error" *ngIf="submitted && f.app.errors">
+                  <div *ngIf="f.app.errors.required" >App es requerido</div>
+                </div>
               </div>
-              <div padding>
-                <ion-button size="large" (click)="onSubmit()" expand="block">Login</ion-button>
+              <div class="content-button" padding>
+                <button ion-button class="btn-yellow">Login</button>
               </div>
             </ion-col>
           </ion-row>
+          <div class="loading" *ngIf="loading">
+              <ion-img width="30" height="30" src="assets/icon/loading.gif"></ion-img>
+          </div>
         </ion-grid>
       </form>
     </div>

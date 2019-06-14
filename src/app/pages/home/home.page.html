@@ -1,14 +1,137 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Ionic Blank
+      Listado de Datos
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
+<ion-content padding>
+  <div class="container-search">
+    <h3>Buscar datos</h3>
+    <form [formGroup]="searchUserForm" (ngSubmit)="onSubmit()" class="form-search">
+      <ion-item>
+        <ion-input type="email" placeholder="Email usuario" formControlName="emailUser" [ngClass]="{ 'is-invalid': submitted && f.emailUser.errors }"></ion-input>
+        <div *ngIf="submitted && f.emailUser.errors">
+          <div *ngIf="f.emailUser.errors.required" class="error">Email usuario es requerido</div>
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" placeholder="App" formControlName="app" [ngClass]="{ 'is-invalid': submitted && f.app.errors }"></ion-input>
+        <div *ngIf="submitted && f.app.errors">
+          <div *ngIf="f.app.errors.required" class="error">App es requerido</div>
+        </div>
+      </ion-item>
+      <div *ngIf="error" class="alert error">{{error}}</div>
+      <div class="content-button">
+        <button ion-button class="btn-yellow">Buscar</button>
+      </div>
+      <div class="loading" *ngIf="loading">
+        <ion-img width="30" height="30" src="assets/icon/loading.gif"></ion-img>
+      </div>
+    </form>
+
   </div>
+
+  <div>
+      <h3>Resultados</h3>
+      <div class="container-filter" *ngIf="isRows">
+        <div class="filter">
+          <p>Filtrar por BookingId</p>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-select placeholder="Filtro" [(ngModel)]="filterId" interface="popover">
+                      <ion-select-option *ngFor="let item of optionsFilter" [value]="item">{{item}}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-input [(ngModel)]="inpuId" type="text" placeholder="Booking Id"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+        <div class="filter">
+          <p>Filtrar por Precio</p>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-select placeholder="Filtro" [(ngModel)]="filterPrice" interface="popover">
+                    <ion-select-option *ngFor="let item of optionsFilter" [value]="item">{{item}}</ion-select-option>
+                </ion-select>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                    <ion-input [(ngModel)]="inputPrice" type="text" placeholder="Precio"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+        <div class="button-filter">
+          <ion-button size="large" (click)="filterTable()">Filtrar</ion-button>
+        </div>
+      </div>
+  </div>
+
+  <ngx-datatable
+          class="material"
+          [rows]="rows"
+          [reorderable]="reorderable"
+          [headerHeight]="50"
+          [footerHeight]="50"
+          [rowHeight]="'auto'"
+          [columnMode]="'force'"
+          [messages]="messages"
+          prop="BookingId">
+          <ngx-datatable-column  name="BookingId" [resizeable]="false">
+            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+              <span (click)="sort()">{{column.name}}</span>
+            </ng-template>
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.id}}
+            </ng-template>
+          </ngx-datatable-column>
+    
+          <ngx-datatable-column name="Cliente" [resizeable]="false">
+            <ng-template let-column="column" ngx-datatable-header-template>
+              <span>{{column.name}}</span>
+            </ng-template>
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.client}}
+            </ng-template>
+          </ngx-datatable-column>
+    
+          <ngx-datatable-column name="Fecha de Creación" [resizeable]="false">
+            <ng-template let-column="column" ngx-datatable-header-template>
+              <span>{{column.name}}</span>
+            </ng-template>
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.createDate}}
+            </ng-template>
+          </ngx-datatable-column>
+    
+          <ngx-datatable-column name="Dirección" [resizeable]="false">
+            <ng-template let-column="column" ngx-datatable-header-template>
+              <span>{{column.name}}</span>
+            </ng-template>
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.address}}
+            </ng-template>
+          </ngx-datatable-column>
+    
+          <ngx-datatable-column name="Precio" [resizeable]="false">
+            <ng-template let-column="column" ngx-datatable-header-template>
+              <span>{{column.name}}</span>
+            </ng-template>
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.price}}
+            </ng-template>
+          </ngx-datatable-column>
+      </ngx-datatable>
+
 </ion-content>

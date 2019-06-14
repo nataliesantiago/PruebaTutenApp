@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { environment } from './../../environments/environment';
 import { HttpHeaders } from "@angular/common/http";
+import { Storage } from '@ionic/storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient, private storage: Storage){}
 
   getParamsHeader(password, app): HttpHeaders {
     return new HttpHeaders({

@@ -46,7 +46,6 @@ export class LoginPage implements OnInit {
 
     this._authenticationService.login(this.f.email.value, this.f.password.value, this.f.app.value).subscribe(
         data => {
-          console.log(data)
           if(data.sessionTokenBck){
             // this.router.navigate([this.returnUrl]);
             this.router.navigateByUrl('home');

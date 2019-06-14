@@ -1,1 +1,16 @@
+@import '~@swimlane/ngx-datatable/release/themes/material.css';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
+h3{
+    color: #5b5b5f;
+    font-weight: bold;
+}
+.container-search{
+    .content-button{
+        text-align: center;
+        margin-top: 2vh;
+        .btn-yellow{
+            width: 50%;
+        }
+    }
+}
 
