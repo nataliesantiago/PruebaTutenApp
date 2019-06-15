@@ -40,3 +40,16 @@ input{
     height: 30px;
     text-align: center;
 }
+ion-select{
+    border-bottom: 1px solid #5b5b5f;
+    height: 38px;
+    line-height: 38px;
+    padding-top: 0;
+    .select-icon{
+        height: 38px;
+    }
+}
+ion-input{
+    border-bottom: 1px solid #5b5b5f;
+    margin-bottom: 1vh;
+}

@@ -4,13 +4,26 @@ h3{
     color: #5b5b5f;
     font-weight: bold;
 }
-.container-search{
-    .content-button{
-        text-align: center;
-        margin-top: 2vh;
-        .btn-yellow{
-            width: 50%;
-        }
+.content-button{
+    text-align: center;
+    margin-top: 2vh;
+    .btn-yellow{
+        width: 50%;
     }
 }
-
+.select-icon{
+    height: 38px;
+}
+ion-card-title{
+    font-size: 1.2em;
+    color: #5b5b5f;
+}
+ion-card-content{
+    position: relative;
+    .price{
+        position: absolute;
+        top: 20px;
+        right: 10px;
+        font-weight: bold;
+    }
+}

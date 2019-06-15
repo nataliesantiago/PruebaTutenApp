@@ -10,18 +10,16 @@
   <div class="container-search">
     <h3>Buscar datos</h3>
     <form [formGroup]="searchUserForm" (ngSubmit)="onSubmit()" class="form-search">
-      <ion-item>
         <ion-input type="email" placeholder="Email usuario" formControlName="emailUser" [ngClass]="{ 'is-invalid': submitted && f.emailUser.errors }"></ion-input>
         <div *ngIf="submitted && f.emailUser.errors">
           <div *ngIf="f.emailUser.errors.required" class="error">Email usuario es requerido</div>
         </div>
-      </ion-item>
-      <ion-item>
+      
         <ion-input type="text" placeholder="App" formControlName="app" [ngClass]="{ 'is-invalid': submitted && f.app.errors }"></ion-input>
         <div *ngIf="submitted && f.app.errors">
           <div *ngIf="f.app.errors.required" class="error">App es requerido</div>
         </div>
-      </ion-item>
+      
       <div *ngIf="error" class="alert error">{{error}}</div>
       <div class="content-button">
         <button ion-button class="btn-yellow">Buscar</button>
@@ -41,16 +39,12 @@
           <ion-grid>
             <ion-row>
               <ion-col>
-                <ion-item>
-                  <ion-select placeholder="Filtro" [(ngModel)]="filterId" interface="popover">
-                      <ion-select-option *ngFor="let item of optionsFilter" [value]="item">{{item}}</ion-select-option>
-                  </ion-select>
-                </ion-item>
+                <ion-select placeholder="Filtro" [(ngModel)]="filterId" interface="popover">
+                    <ion-select-option *ngFor="let item of optionsFilter" [value]="item">{{item}}</ion-select-option>
+                </ion-select>
               </ion-col>
               <ion-col>
-                <ion-item>
-                  <ion-input [(ngModel)]="inpuId" type="text" placeholder="Booking Id"></ion-input>
-                </ion-item>
+                <ion-input [(ngModel)]="inpuId" type="text" placeholder="Booking Id"></ion-input>
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -65,73 +59,27 @@
                 </ion-select>
               </ion-col>
               <ion-col>
-                <ion-item>
-                    <ion-input [(ngModel)]="inputPrice" type="text" placeholder="Precio"></ion-input>
-                </ion-item>
+                <ion-input [(ngModel)]="inputPrice" type="text" placeholder="Precio"></ion-input>
               </ion-col>
             </ion-row>
           </ion-grid>
         </div>
         <div class="button-filter">
-          <ion-button size="large" (click)="filterTable()">Filtrar</ion-button>
+          <div class="content-button">
+            <button ion-button (click)="filterTable()" class="btn-yellow">Filtrar</button>
+          </div>
         </div>
       </div>
   </div>
 
-  <ngx-datatable
-          class="material"
-          [rows]="rows"
-          [reorderable]="reorderable"
-          [headerHeight]="50"
-          [footerHeight]="50"
-          [rowHeight]="'auto'"
-          [columnMode]="'force'"
-          [messages]="messages"
-          prop="BookingId">
-          <ngx-datatable-column  name="BookingId" [resizeable]="false">
-            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
-              <span (click)="sort()">{{column.name}}</span>
-            </ng-template>
-            <ng-template let-row="row" ngx-datatable-cell-template>
-              {{row.id}}
-            </ng-template>
-          </ngx-datatable-column>
-    
-          <ngx-datatable-column name="Cliente" [resizeable]="false">
-            <ng-template let-column="column" ngx-datatable-header-template>
-              <span>{{column.name}}</span>
-            </ng-template>
-            <ng-template let-row="row" ngx-datatable-cell-template>
-              {{row.client}}
-            </ng-template>
-          </ngx-datatable-column>
-    
-          <ngx-datatable-column name="Fecha de Creación" [resizeable]="false">
-            <ng-template let-column="column" ngx-datatable-header-template>
-              <span>{{column.name}}</span>
-            </ng-template>
-            <ng-template let-row="row" ngx-datatable-cell-template>
-              {{row.createDate}}
-            </ng-template>
-          </ngx-datatable-column>
-    
-          <ngx-datatable-column name="Dirección" [resizeable]="false">
-            <ng-template let-column="column" ngx-datatable-header-template>
-              <span>{{column.name}}</span>
-            </ng-template>
-            <ng-template let-row="row" ngx-datatable-cell-template>
-              {{row.address}}
-            </ng-template>
-          </ngx-datatable-column>
-    
-          <ngx-datatable-column name="Precio" [resizeable]="false">
-            <ng-template let-column="column" ngx-datatable-header-template>
-              <span>{{column.name}}</span>
-            </ng-template>
-            <ng-template let-row="row" ngx-datatable-cell-template>
-              {{row.price}}
-            </ng-template>
-          </ngx-datatable-column>
-      </ngx-datatable>
+  <ion-card (click)="expandItem()" *ngFor="let row of rows">
+    <ion-card-content>
+      <p class="price">${{row.price}}</p>
+      <ion-card-title>Id: {{row.id}}</ion-card-title>
+      <ion-label>{{row.client}}</ion-label>
+      <p>{{row.address}}</p>
+      <p>Fecha creación: {{row.createDate}}</p>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

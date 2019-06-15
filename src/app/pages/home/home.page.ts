@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from './../../services/data.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-home',
@@ -56,13 +57,13 @@ export class HomePage {
           this.rows = [...data.map(book => {
             return { "id": book.bookingId,
                      "client": `${book.tutenUserClient.firstName} ${book.tutenUserClient.lastName}`,
-                     "createDate": book.bookingTime,
+                     "createDate": moment(book.bookingTime).format('DD-MM-YYYY'),
                      "address": book.locationId.streetAddress,
                      "price": book.bookingPrice   
-                 
                     };
           })];
           this.copyData = [...this.rows];
+          console.log(this.rows)
           if(this.rows){
             this.isRows = true;
           }else{

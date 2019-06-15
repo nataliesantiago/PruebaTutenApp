@@ -9,21 +9,15 @@
                 <h3>Login</h3>
               </div>
               <div padding>
-                <ion-item>
                   <ion-input type="email" placeholder="Email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"></ion-input>
-                </ion-item>
                 <div class="error" *ngIf="submitted && f.email.errors">
                   <div *ngIf="f.email.errors.required" >Email es requerido</div>
                 </div>
-                <ion-item>
                   <ion-input type="password" placeholder="Password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"></ion-input>
-                </ion-item>
                 <div class="error" *ngIf="submitted && f.password.errors">
                   <div *ngIf="f.password.errors.required" >Password es requerido</div>
                 </div>
-                <ion-item>
                     <ion-input type="text" placeholder="App" formControlName="app" [ngClass]="{ 'is-invalid': submitted && f.app.errors }"></ion-input>
-                </ion-item>
                 <div class="error" *ngIf="submitted && f.app.errors">
                   <div *ngIf="f.app.errors.required" >App es requerido</div>
                 </div>
